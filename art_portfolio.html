@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Art Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: white;
+            color: black;
+        }
+        header {
+            background-color: white;
+            border-bottom: 2px solid #ddd;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: white;
+        }
+        nav button {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            color: #333;
+            border-bottom: 2px solid transparent;
+        }
+        nav button.active, nav button:hover {
+            border-bottom: 2px solid darkviolet;
+            color: darkviolet;
+        }
+        .tab-content {
+            display: none;
+            padding: 2rem;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            text-align: center;
+        }
+        .gallery-item img {
+            width: 100%;
+            max-width: 200px;
+            cursor: pointer;
+            border: 2px solid #eee;
+            border-radius: 4px;
+        }
+        .description {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #444;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            margin: 5% auto;
+            display: block;
+            max-width: 90%;
+        }
+        .close {
+            position: absolute;
+            top: 20px; right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+        }
+        .socials a {
+            margin: 0 0.5rem;
+            text-decoration: none;
+            color: darkviolet;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <button class="tablink active" data-tab="school">Art School Paintings</button>
+        <button class="tablink" data-tab="animals">Animal Portraits</button>
+        <button class="tablink" data-tab="abstract">Abstract</button>
+        <button class="tablink" data-tab="landscape">Landscape</button>
+    </nav>
+</header>
+
+<section id="school" class="tab-content active">
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/200" alt="Artwork" onclick="openModal(this.src)">
+            <div class="description">Early piece exploring composition.<br>Oil on canvas, 2010.</div>
+        </div>
+        <!-- Add more artworks as needed -->
+    </div>
+</section>
+
+<section id="animals" class="tab-content">
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/200" alt="Artwork" onclick="openModal(this.src)">
+            <div class="description">Commissioned pet portrait.<br>Acrylic on board, 2022.</div>
+        </div>
+    </div>
+</section>
+
+<section id="abstract" class="tab-content">
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/200" alt="Artwork" onclick="openModal(this.src)">
+            <div class="description">Color field study.<br>Mixed media, 2023.</div>
+        </div>
+    </div>
+</section>
+
+<section id="landscape" class="tab-content">
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/200" alt="Artwork" onclick="openModal(this.src)">
+            <div class="description">Evening by the lake.<br>Watercolor, 2021.</div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div id="myModal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img">
+</div>
+
+<footer>
+    <div class="socials">
+        Follow me on:
+        <a href="#" target="_blank">Instagram</a> |
+        <a href="#" target="_blank">TikTok</a> |
+        <a href="#" target="_blank">Facebook</a>
+    </div>
+    <p>© 2025 My Art Portfolio</p>
+</footer>
+
+<script>
+    const tabs = document.querySelectorAll('.tablink');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabs.forEach(b => b.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    function openModal(src) {
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("modal-img");
+        modal.style.display = "block";
+        modalImg.src = src;
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
